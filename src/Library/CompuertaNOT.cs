@@ -3,25 +3,17 @@ public class CompuertaNOT : Compuerta
 {
     public CompuertaNOT(string nombre) : base(nombre)
     {
-        
     }
     /// <summary>
-    /// Devuelve el resultado de la compuerta NOT
+    /// Devuelve el resultado de la compuerta NOT y tira una excepción si no tiene una entrada
     /// </summary>
     /// <returns></returns>
-    public int Calcular()
+    public override bool Calcular()
     {
-        foreach (var element in Entradas)
-        {   
-            if (element.Value == 1)
-            {
-                return 0;
-            }
-            else
-            {
-                return 1;
-            }
+        if (Entradas.Count != 1)
+        {
+            throw new IndexOutOfRangeException("La compuerta no tiene 1 entrada");
         }
-        return 0;
+        return !Entradas.First().Value.Calcular();
     }
 }

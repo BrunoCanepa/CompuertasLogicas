@@ -5,16 +5,22 @@ public class CompuertaAND : Compuerta
     {
     }
     /// <summary>
-    /// Devuelve el resultado de la compuerta AND
+    /// Devuelve el resultado de la compuerta AND, y tira una excepció si no tiene dos entradas.
     /// </summary>
     /// <returns></returns>
-    public int Calcular()
+    public override bool Calcular()
     {
-        int res = 1;
-        foreach (var element in Entradas)
+        if (Entradas.Count != 2)
         {
-            res *= element.Value;
+            throw new IndexOutOfRangeException("La compuerta no tiene 2 entradas");
         }
-        return res;
+            foreach (var element in Entradas)
+            {
+                if (!element.Value.Calcular())
+                {
+                    return false;
+                }
+            }
+            return true;
     }
 }
